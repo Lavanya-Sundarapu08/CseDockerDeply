@@ -1,54 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>dockerdeploy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Cse-Docker-Deploy-1</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
-		</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+<modelVersion>4.0.0</modelVersion>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.2</version>
+</parent>
+
+
+<groupId>com.example</groupId>
+<artifactId>dockerdeploy</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+
+<name>dockerdeploy</name>
+<description>Spring Boot Docker Deploy Project</description>
+
+<properties>
+ <java.version>17</java.version>
+</properties>
+
+<dependencies>
+
+ <!-- Spring Boot Web -->
+ <dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+ </dependency>
+
+ <!-- JUnit Testing -->
+ <dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+  <scope>test</scope>
+ </dependency>
+
+</dependencies>
+
+<build>
+ <plugins>
+
+  <!-- Spring Boot Plugin -->
+  <plugin>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-maven-plugin</artifactId>
+  </plugin>
+
+  <!-- Maven Surefire Plugin (JUnit execution) -->
+  <plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-surefire-plugin</artifactId>
+   <version>3.2.5</version>
+  </plugin>
+
+  <!-- JaCoCo Code Coverage -->
+  <plugin>
+   <groupId>org.jacoco</groupId>
+   <artifactId>jacoco-maven-plugin</artifactId>
+   <version>0.8.11</version>
+   <executions>
+
+    <execution>
+     <goals>
+      <goal>prepare-agent</goal>
+     </goals>
+    </execution>
+
+    <execution>
+     <id>report</id>
+     <phase>test</phase>
+     <goals>
+      <goal>report</goal>
+     </goals>
+    </execution>
+
+   </executions>
+  </plugin>
+
+  <!-- SonarQube Plugin -->
+  <plugin>
+   <groupId>org.sonarsource.scanner.maven</groupId>
+   <artifactId>sonar-maven-plugin</artifactId>
+   <version>3.11.0.3922</version>
+  </plugin>
+
+ </plugins>
+</build>
 
 </project>
