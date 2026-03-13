@@ -6,6 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -22,7 +23,7 @@
     <properties>
         <java.version>17</java.version>
 
-        <!-- SonarQube properties -->
+        <!-- SonarQube Properties -->
         <sonar.projectKey>dockerdeploy</sonar.projectKey>
         <sonar.projectName>dockerdeploy</sonar.projectName>
         <sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
@@ -37,7 +38,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JUnit Testing -->
+        <!-- Testing (includes JUnit 5 automatically) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -55,7 +56,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Maven Surefire Plugin (JUnit execution) -->
+            <!-- Maven Surefire Plugin for JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -68,14 +69,15 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
                 <executions>
-                    <!-- Prepare agent before tests -->
+
+                    <!-- Attach agent before tests -->
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
 
-                    <!-- Generate report after tests -->
+                    <!-- Generate coverage report -->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -83,10 +85,11 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+
                 </executions>
             </plugin>
 
-            <!-- SonarQube Plugin -->
+            <!-- SonarQube Scanner -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
