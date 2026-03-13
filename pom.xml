@@ -4,91 +4,96 @@
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
  http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-<parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.2</version>
-</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.2</version>
+    </parent>
 
+    <groupId>com.example</groupId>
+    <artifactId>dockerdeploy</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-<groupId>com.example</groupId>
-<artifactId>dockerdeploy</artifactId>
-<version>0.0.1-SNAPSHOT</version>
+    <name>dockerdeploy</name>
+    <description>Spring Boot Docker Deploy Project</description>
 
-<name>dockerdeploy</name>
-<description>Spring Boot Docker Deploy Project</description>
+    <properties>
+        <java.version>17</java.version>
 
-<properties>
- <java.version>17</java.version>
-</properties>
+        <!-- SonarQube properties -->
+        <sonar.projectKey>dockerdeploy</sonar.projectKey>
+        <sonar.projectName>dockerdeploy</sonar.projectName>
+        <sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
+        <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+    </properties>
 
-<dependencies>
+    <dependencies>
 
- <!-- Spring Boot Web -->
- <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-web</artifactId>
- </dependency>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
- <!-- JUnit Testing -->
- <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-test</artifactId>
-  <scope>test</scope>
- </dependency>
+        <!-- JUnit Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-</dependencies>
+    </dependencies>
 
-<build>
- <plugins>
+    <build>
+        <plugins>
 
-  <!-- Spring Boot Plugin -->
-  <plugin>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-maven-plugin</artifactId>
-  </plugin>
+            <!-- Spring Boot Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 
-  <!-- Maven Surefire Plugin (JUnit execution) -->
-  <plugin>
-   <groupId>org.apache.maven.plugins</groupId>
-   <artifactId>maven-surefire-plugin</artifactId>
-   <version>3.2.5</version>
-  </plugin>
+            <!-- Maven Surefire Plugin (JUnit execution) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
 
-  <!-- JaCoCo Code Coverage -->
-  <plugin>
-   <groupId>org.jacoco</groupId>
-   <artifactId>jacoco-maven-plugin</artifactId>
-   <version>0.8.11</version>
-   <executions>
+            <!-- JaCoCo Code Coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <!-- Prepare agent before tests -->
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
 
-    <execution>
-     <goals>
-      <goal>prepare-agent</goal>
-     </goals>
-    </execution>
+                    <!-- Generate report after tests -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-    <execution>
-     <id>report</id>
-     <phase>test</phase>
-     <goals>
-      <goal>report</goal>
-     </goals>
-    </execution>
+            <!-- SonarQube Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.11.0.3922</version>
+            </plugin>
 
-   </executions>
-  </plugin>
-
-  <!-- SonarQube Plugin -->
-  <plugin>
-   <groupId>org.sonarsource.scanner.maven</groupId>
-   <artifactId>sonar-maven-plugin</artifactId>
-   <version>3.11.0.3922</version>
-  </plugin>
-
- </plugins>
-</build>
+        </plugins>
+    </build>
 
 </project>
