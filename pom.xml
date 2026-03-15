@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -11,23 +12,21 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.2</version>
+        <relativePath/>
     </parent>
 
     <groupId>com.example</groupId>
     <artifactId>dockerdeploy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>dockerdeploy</name>
     <description>Spring Boot Docker Deploy Project</description>
 
+    <!-- Recommended Properties -->
     <properties>
         <java.version>17</java.version>
-
-        <!-- SonarQube Properties -->
-        <sonar.projectKey>dockerdeploy</sonar.projectKey>
-        <sonar.projectName>dockerdeploy</sonar.projectName>
-        <sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
-        <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -38,7 +37,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Testing (includes JUnit 5 automatically) -->
+        <!-- Spring Boot Test (JUnit 5 included) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -50,46 +49,49 @@
     <build>
         <plugins>
 
-            <!-- Spring Boot Plugin -->
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Maven Surefire Plugin for JUnit -->
+            <!-- Maven Surefire Plugin (Runs Tests) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
 
-            <!-- JaCoCo Code Coverage -->
+            <!-- JaCoCo Code Coverage Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
+
                 <executions>
 
-                    <!-- Attach agent before tests -->
+                    <!-- Attach JaCoCo agent -->
                     <execution>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
 
-                    <!-- Generate coverage report -->
+                    <!-- Generate Coverage Report -->
                     <execution>
                         <id>report</id>
-                        <phase>test</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
 
                 </executions>
+
             </plugin>
 
-            <!-- SonarQube Scanner -->
+            <!-- SonarQube Maven Plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
