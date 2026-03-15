@@ -23,7 +23,7 @@
     <name>dockerdeploy</name>
     <description>Spring Boot Docker Deploy Project</description>
 
-    <!-- Recommended Properties -->
+    <!-- Recommended Properties-->
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
